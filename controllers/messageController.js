@@ -3,7 +3,7 @@ const Message = require("../models/Message");
 const User = require("../models/User");
 const socketIO = require("../config/socket");
 
-const cloudStorage = require("../services/cloudStorage");
+
 const analyticsService = require("../services/analyticsService");
 const rateLimiter = require("../middlewares/rateLimiter");
 
@@ -23,18 +23,9 @@ exports.sendMessage = async (req, res) => {
       return res.status(404).json({ error: "Receiver not found" });
     }
 
-    let audioFilePath = null;
 
-    // Step 3: Handle audio file upload if applicable
-    if (messageType === "audio" && req.file) {
-      try {
-        const uploadedFile = await cloudStorage.uploadFile(req.file);
-        audioFilePath = uploadedFile.Location;
-      } catch (uploadError) {
-        console.error("Error uploading audio file:", uploadError);
-        return res.status(500).json({ error: "Error uploading audio file" });
-      }
-    }
+
+    
 
     // Step 4: Create the new message
     const newMessage = new Message({
