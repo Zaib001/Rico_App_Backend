@@ -11,7 +11,7 @@ const connectDB = async () => {
     };
 
     try {
-        await mongoose.connect(process.env.DB_URI, options);
+        await mongoose.connect(process.env.DB_URI || "mongodb+srv://zebimalik4567:0JRah3RfhsqTCOwI@cluster0.6jhoy.mongodb.net/", options);
         logger.info('MongoDB connected successfully');
     } catch (error) {
         logger.error(`MongoDB connection error: ${error.message}`);
