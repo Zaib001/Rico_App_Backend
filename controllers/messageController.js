@@ -2,7 +2,7 @@ const { check, validationResult } = require("express-validator");
 const Message = require("../models/Message");
 const User = require("../models/User");
 const socketIO = require("../config/socket");
-const notificationService = require("../services/notificationService");
+
 const cloudStorage = require("../services/cloudStorage");
 const analyticsService = require("../services/analyticsService");
 const rateLimiter = require("../middlewares/rateLimiter");
@@ -55,12 +55,7 @@ exports.sendMessage = async (req, res) => {
     // Step 6: Log the messaging activity
     await analyticsService.logMessageActivity(req.user._id, receiverId);
 
-    // Step 7: Send push notification if device token exists
-    await notificationService.sendMessageNotification(
-      receiver,
-      req.user,
-      newMessage
-    );
+    
 
     res.status(201).json({ success: true, message: newMessage });
   } catch (error) {
