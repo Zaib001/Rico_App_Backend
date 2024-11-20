@@ -5,7 +5,7 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 const socketIo = require("socket.io");
 const errorHandler = require("./middlewares/errorHandler");
-const path = require("path");
+
 // Load environment variables
 dotenv.config();
 
@@ -29,9 +29,7 @@ connectDB();
 
 // Middleware setup
 app.use(express.json());
-app.use('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-});
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:5173",
