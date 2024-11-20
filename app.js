@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO with CORS settings
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // Ensure this matches your frontend URL
+    origin: process.env.FRONTEND_URL || "https://site33715-45ghcw.scloudsite101.com", // Ensure this matches your frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
