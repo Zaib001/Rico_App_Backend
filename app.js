@@ -16,7 +16,10 @@ const server = http.createServer(app);
 // Initialize Socket.IO with CORS settings
 const io = socketIo(server, {
   cors: {
-    origin: {"https://site33715-45ghcw.scloudsite101.com" , "http://localhost:5173"}, // Ensure this matches your frontend URL
+   origin: [
+      "https://site33715-45ghcw.scloudsite101.com",
+      "http://localhost:5173",
+    ], // Ensure this matches your frontend URL
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -32,12 +35,16 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: {"https://site33715-45ghcw.scloudsite101.com" , "http://localhost:5173"},
+    origin: [
+      "https://site33715-45ghcw.scloudsite101.com",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
 
 // Socket.IO real-time notification logic
 io.on("connection", (socket) => {
